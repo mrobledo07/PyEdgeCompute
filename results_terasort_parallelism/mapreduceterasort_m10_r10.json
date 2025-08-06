@@ -1,0 +1,162 @@
+{
+  "message_type": "task_result",
+  "type": "mapreduceterasort",
+  "numMappers": 10,
+  "numReducers": 10,
+  "taskId": "c147c77e-ff5b-400c-b999-de20aaad7002",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer9/9.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer7/7.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer5/5.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer8/8.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer1/1.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer4/4.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer0/0.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer2/2.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer3/3.txt",
+    "s3://orchestratorfororchestratingworkers/72622324-0ace-405c-b8de-13c28788efe9/c147c77e-ff5b-400c-b999-de20aaad7002/reducer6/6.txt"
+  ],
+  "metadata": {
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper9": [
+      1754484657.313,
+      0.3339,
+      9.3321,
+      1.0256,
+      1754484668.248
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper2": [
+      1754484657.307,
+      0.3052,
+      10.1749,
+      0.8372,
+      1754484668.865
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper3": [
+      1754484657.307,
+      0.3119,
+      10.1273,
+      0.9572,
+      1754484668.944
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper1": [
+      1754484657.306,
+      0.3105,
+      10.3042,
+      0.8713,
+      1754484669.034
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper4": [
+      1754484657.308,
+      0.3145,
+      10.3474,
+      0.9205,
+      1754484669.135
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper0": [
+      1754484657.305,
+      0.3045,
+      10.3818,
+      0.956,
+      1754484669.188
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper6": [
+      1754484657.309,
+      0.3515,
+      10.4663,
+      0.9462,
+      1754484669.318
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper5": [
+      1754484657.308,
+      0.3751,
+      10.6279,
+      0.8713,
+      1754484669.424
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper8": [
+      1754484657.312,
+      0.3664,
+      11.4401,
+      0.953,
+      1754484670.34
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-mapper7": [
+      1754484657.311,
+      0.3511,
+      11.757,
+      0.938,
+      1754484670.615
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer9": [
+      1754484670.639,
+      0.7224,
+      6.8756,
+      0.6718,
+      1754484678.91
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer7": [
+      1754484670.634,
+      0.8234,
+      6.8842,
+      0.6828,
+      1754484679.026
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer5": [
+      1754484670.629,
+      0.9718,
+      6.7652,
+      0.659,
+      1754484679.026
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer8": [
+      1754484670.636,
+      0.9775,
+      6.8143,
+      0.6712,
+      1754484679.1
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer1": [
+      1754484670.621,
+      0.8034,
+      7.0719,
+      0.6107,
+      1754484679.108
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer4": [
+      1754484670.627,
+      0.8684,
+      7.0796,
+      0.5764,
+      1754484679.152
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer0": [
+      1754484670.619,
+      0.7906,
+      7.0878,
+      0.7038,
+      1754484679.202
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer2": [
+      1754484670.623,
+      0.8458,
+      7.1736,
+      0.6142,
+      1754484679.257
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer3": [
+      1754484670.625,
+      0.8856,
+      7.1947,
+      0.6174,
+      1754484679.323
+    ],
+    "c147c77e-ff5b-400c-b999-de20aaad7002-reducer6": [
+      1754484670.632,
+      0.8391,
+      6.9307,
+      1.9698,
+      1754484680.372
+    ]
+  }
+}

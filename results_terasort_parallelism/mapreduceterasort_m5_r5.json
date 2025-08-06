@@ -1,0 +1,87 @@
+{
+  "message_type": "task_result",
+  "type": "mapreduceterasort",
+  "numMappers": 5,
+  "numReducers": 5,
+  "taskId": "dcecb7bb-f8bc-4364-9392-2c803195d3ee",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/f74eb6aa-e22f-4c45-8d4c-853ba24b47b7/dcecb7bb-f8bc-4364-9392-2c803195d3ee/reducer0/0.txt",
+    "s3://orchestratorfororchestratingworkers/f74eb6aa-e22f-4c45-8d4c-853ba24b47b7/dcecb7bb-f8bc-4364-9392-2c803195d3ee/reducer3/3.txt",
+    "s3://orchestratorfororchestratingworkers/f74eb6aa-e22f-4c45-8d4c-853ba24b47b7/dcecb7bb-f8bc-4364-9392-2c803195d3ee/reducer4/4.txt",
+    "s3://orchestratorfororchestratingworkers/f74eb6aa-e22f-4c45-8d4c-853ba24b47b7/dcecb7bb-f8bc-4364-9392-2c803195d3ee/reducer1/1.txt",
+    "s3://orchestratorfororchestratingworkers/f74eb6aa-e22f-4c45-8d4c-853ba24b47b7/dcecb7bb-f8bc-4364-9392-2c803195d3ee/reducer2/2.txt"
+  ],
+  "metadata": {
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-mapper2": [
+      1754484597.19,
+      0.6345,
+      13.159,
+      0.711,
+      1754484611.938
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-mapper1": [
+      1754484597.189,
+      0.6504,
+      13.1637,
+      0.7427,
+      1754484612.016
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-mapper0": [
+      1754484597.189,
+      0.6218,
+      13.2884,
+      0.6835,
+      1754484612.024
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-mapper4": [
+      1754484597.191,
+      0.6126,
+      13.2343,
+      0.7326,
+      1754484612.06
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-mapper3": [
+      1754484597.191,
+      0.6121,
+      13.2658,
+      0.7996,
+      1754484612.108
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-reducer0": [
+      1754484612.111,
+      0.6022,
+      6.8786,
+      0.6774,
+      1754484620.271
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-reducer3": [
+      1754484612.115,
+      0.6003,
+      7.0485,
+      0.5896,
+      1754484620.354
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-reducer4": [
+      1754484612.116,
+      0.6654,
+      6.9895,
+      0.5982,
+      1754484620.37
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-reducer1": [
+      1754484612.112,
+      0.6233,
+      7.1141,
+      0.6174,
+      1754484620.468
+    ],
+    "dcecb7bb-f8bc-4364-9392-2c803195d3ee-reducer2": [
+      1754484612.114,
+      0.7239,
+      7.0683,
+      0.5981,
+      1754484620.505
+    ]
+  }
+}
