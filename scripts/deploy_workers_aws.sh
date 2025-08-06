@@ -12,7 +12,8 @@ WORKER_COUNT="$1"
 INSTANCE_ROLE="MyEC2S3AccessRole"
 KEY_PAIR_NAME="worker-keys" # Use your .pem key name
 #AMI_ID="ami-062abdb4b1d1cc0bf" # Use the worker AMI ID old (without aws credentials provider timeout)
-AMI_ID="ami-0e1ac9f630b80a8df"
+# AMI_ID="ami-0e1ac9f630b80a8df" AMI creates s3client each time
+AMI_ID="ami-0b187131c091d4904"
 INSTANCE_TYPE="t3.medium"
 
 aws ec2 run-instances \

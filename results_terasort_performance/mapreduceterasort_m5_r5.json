@@ -1,0 +1,87 @@
+{
+  "message_type": "task_result",
+  "type": "mapreduceterasort",
+  "numMappers": 5,
+  "numReducers": 5,
+  "taskId": "512ef683-e614-451e-9c6a-ed062a7b3d06",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/7783e3d5-015b-4d09-8bcb-562b2f367520/512ef683-e614-451e-9c6a-ed062a7b3d06/reducer4/4.txt",
+    "s3://orchestratorfororchestratingworkers/7783e3d5-015b-4d09-8bcb-562b2f367520/512ef683-e614-451e-9c6a-ed062a7b3d06/reducer1/1.txt",
+    "s3://orchestratorfororchestratingworkers/7783e3d5-015b-4d09-8bcb-562b2f367520/512ef683-e614-451e-9c6a-ed062a7b3d06/reducer0/0.txt",
+    "s3://orchestratorfororchestratingworkers/7783e3d5-015b-4d09-8bcb-562b2f367520/512ef683-e614-451e-9c6a-ed062a7b3d06/reducer3/3.txt",
+    "s3://orchestratorfororchestratingworkers/7783e3d5-015b-4d09-8bcb-562b2f367520/512ef683-e614-451e-9c6a-ed062a7b3d06/reducer2/2.txt"
+  ],
+  "metadata": {
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-mapper0": [
+      1754491133.759,
+      0.2004,
+      1.8747,
+      0.4051,
+      1754491136.289
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-mapper1": [
+      1754491133.76,
+      0.2322,
+      2.0692,
+      0.433,
+      1754491136.543
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-mapper4": [
+      1754491133.764,
+      0.245,
+      2.1199,
+      0.3889,
+      1754491136.567
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-mapper2": [
+      1754491133.761,
+      0.2226,
+      2.1172,
+      0.435,
+      1754491136.585
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-mapper3": [
+      1754491133.762,
+      0.2238,
+      2.344,
+      0.4398,
+      1754491136.856
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-reducer4": [
+      1754491136.867,
+      0.198,
+      1.1361,
+      0.1554,
+      1754491138.358
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-reducer1": [
+      1754491136.861,
+      0.1927,
+      1.3293,
+      0.1623,
+      1754491138.547
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-reducer0": [
+      1754491136.86,
+      0.2062,
+      1.3174,
+      0.1793,
+      1754491138.564
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-reducer3": [
+      1754491136.865,
+      0.2165,
+      1.4327,
+      0.1795,
+      1754491138.695
+    ],
+    "512ef683-e614-451e-9c6a-ed062a7b3d06-reducer2": [
+      1754491136.863,
+      0.1945,
+      1.4603,
+      0.1998,
+      1754491138.718
+    ]
+  }
+}

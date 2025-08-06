@@ -16,6 +16,35 @@ let s3Client;
 //   });
 // }
 
+let credentialProvider;
+
+export async function createCredentialProvider() {
+  if (!credentialProvider) {
+    credentialProvider = fromInstanceMetadata({
+      timeout: 1000, // milisegundos antes de timeout en IMDS
+      maxRetries: 3, // reintentos de credenciales
+    });
+  }
+}
+
+export async function createAwsS3ClientOnce() {
+  if (!s3Client) {
+    createCredentialProvider();
+    s3Client = new S3Client({
+      region: "eu-north-1",
+      credentials: credentialProvider,
+    });
+
+    try {
+      await s3Client.config.credentials();
+      console.log("[INFO awsS3Client] AWS credentials loaded successfully");
+    } catch (err) {
+      console.error("[ERROR awsS3Client] Failed to load AWS credentials:", err);
+      throw err;
+    }
+  }
+}
+
 export async function createAwsS3Client() {
   // Usamos fromInstanceMetadata con reintentos internos
   const credentialProvider = fromInstanceMetadata({
