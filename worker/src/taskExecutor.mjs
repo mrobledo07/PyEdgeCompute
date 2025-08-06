@@ -64,9 +64,9 @@ export async function executeTask(task, ws, stopWatch) {
     let rawBytesLine;
     if (task.type === "reduceterasort" || task.type === "reducewordcount") {
       rawBytesLine = `raw_bytes = ${JSON.stringify(bytes)}`;
-      console.log(
-        `🔍 raw_bytes for REDUCER task ${task.taskId} is: ${rawBytesLine}`
-      );
+      // console.log(
+      //   `🔍 raw_bytes for REDUCER task ${task.taskId} is: ${rawBytesLine}`
+      // );
     } else {
       const b64 = bytes.toString("base64");
       rawBytesLine = `raw_bytes = base64.b64decode("${b64}")`;
@@ -101,8 +101,8 @@ result
       `📜 Executing task ${task.taskId} from client ${task.clientId} with arg ${task.arg}`
     );
 
-    console.log("CODE:");
-    console.log(pyScript);
+    // console.log("CODE:");
+    // console.log(pyScript);
 
     stopWatch.start();
     let result = await pyodide.runPythonAsync(pyScript);

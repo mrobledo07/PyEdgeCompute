@@ -60,11 +60,11 @@ export async function getSerializedResults(results) {
   const b64List = [];
   for (const result of results) {
     let partialResult = await getTextFromMinio(result);
-    console.log("🔍 First partial:", partialResult);
+    //console.log("🔍 First partial:", partialResult);
     b64List.push(partialResult.toString("utf-8"));
   }
   //console.log("🔍 Mappers results aggregated:", resultJSON);
-  console.log("🔍 Returning serialized results for REDUCER:", b64List);
+  //console.log("🔍 Returning serialized results for REDUCER:", b64List);
   // Return the
   return b64List;
 }
