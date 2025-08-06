@@ -1,0 +1,48 @@
+{
+  "message_type": "task_result",
+  "type": "mapreducewordcount",
+  "numMappers": 4,
+  "numReducers": 1,
+  "taskId": "f8d91c4a-7dca-40b9-a8a1-32067f8724eb",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/13015988-801c-4316-88e3-3d53b47949b1/f8d91c4a-7dca-40b9-a8a1-32067f8724eb/reducer/0.txt"
+  ],
+  "metadata": {
+    "f8d91c4a-7dca-40b9-a8a1-32067f8724eb-mapper3": [
+      1754492313.435,
+      0.1448,
+      9.277,
+      0.0878,
+      1754492337.806
+    ],
+    "f8d91c4a-7dca-40b9-a8a1-32067f8724eb-mapper2": [
+      1754492313.435,
+      0.2012,
+      6.7884,
+      0.0625,
+      1754492338.86
+    ],
+    "f8d91c4a-7dca-40b9-a8a1-32067f8724eb-mapper1": [
+      1754492313.438,
+      0.1396,
+      10.3468,
+      12.5717,
+      1754492353.893
+    ],
+    "f8d91c4a-7dca-40b9-a8a1-32067f8724eb-mapper0": [
+      1754492313.437,
+      0.2339,
+      10.2719,
+      19.1674,
+      1754492360.167
+    ],
+    "f8d91c4a-7dca-40b9-a8a1-32067f8724eb-reducer": [
+      1754492360.169,
+      0.5949,
+      2.6445,
+      0.0423,
+      1754492363.452
+    ]
+  }
+}

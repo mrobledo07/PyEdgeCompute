@@ -1,0 +1,12 @@
+{
+  "type": "mapreduceterasort",
+  "code": [
+    "client/codes/map_terasort.py",
+    "client/codes/reduce_terasort.py"
+  ],
+  "args": [
+    ["s3://clientbucketforstoringinputs/terasort-20m", 5, 5],
+    ["s3://clientbucketforstoringinputs/terasort-20m", 10, 5],
+    ["s3://clientbucketforstoringinputs/terasort-20m", 15, 5]
+  ]
+}
