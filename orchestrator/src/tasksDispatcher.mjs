@@ -45,20 +45,20 @@ export function processTaskQueue() {
     const numAvailableWorkers = workerRegistry.getTotalAvailableWorkers();
 
     const canDispatch = (() => {
-      if (
-        task.type === "mapreducewordcount" ||
-        task.type === "mapreduceterasort"
-      ) {
-        console.log(`Mappers needed: ${task.arg[1]}`);
-        console.log(`Available workers: ${numAvailableWorkers}`);
-        return numAvailableWorkers >= task.arg[1]; // num mappers
-      }
+      // if (
+      //   task.type === "mapreducewordcount" ||
+      //   task.type === "mapreduceterasort"
+      // ) {
+      //   console.log(`Mappers needed: ${task.arg[1]}`);
+      //   console.log(`Available workers: ${numAvailableWorkers}`);
+      //   return numAvailableWorkers >= task.arg[1]; // num mappers
+      // }
 
-      if (task.type === "reduceterasort") {
-        console.log(`Reducers needed: ${task.numReducers}`);
-        console.log(`Available workers: ${numAvailableWorkers}`);
-        return numAvailableWorkers >= task.numReducers;
-      }
+      // if (task.type === "reduceterasort") {
+      //   console.log(`Reducers needed: ${task.numReducers}`);
+      //   console.log(`Available workers: ${numAvailableWorkers}`);
+      //   return numAvailableWorkers >= task.numReducers;
+      // }
 
       console.log(`Available workers: ${numAvailableWorkers}`);
       return numAvailableWorkers > 0;
@@ -177,18 +177,18 @@ export function dispatchTask(task) {
  * Dispatches map tasks to available workers.
  */
 function dispatchMappers(task) {
-  const numAvailableWorkers = workerRegistry.getTotalAvailableWorkers();
+  //const numAvailableWorkers = workerRegistry.getTotalAvailableWorkers();
   const [mapperCode, reducerCode] = task.code;
   const numMappers = task.arg[1];
 
-  if (numMappers > numAvailableWorkers) {
-    console.log(
-      `🕒 Not enough workers for map phase of task ${task.taskId} from client ${task.clientId}`
-    );
-    console.log("Required mappers:", numMappers);
-    console.log("Available workers:", numAvailableWorkers);
-    return false;
-  }
+  // if (numMappers > numAvailableWorkers) {
+  //   console.log(
+  //     `🕒 Not enough workers for map phase of task ${task.taskId} from client ${task.clientId}`
+  //   );
+  //   console.log("Required mappers:", numMappers);
+  //   console.log("Available workers:", numAvailableWorkers);
+  //   return false;
+  // }
 
   // Prepare mapper task
   task.code = mapperCode;
@@ -215,11 +215,13 @@ function dispatchMappers(task) {
     resultsReducers: [],
   });
   for (let i = 0; i < numMappers; i++) {
-    const worker = workersAvailable[i];
+    //const worker = workersAvailable[i];
+    const isAssigned = i < workersAvailable.length;
+    const worker = isAssigned ? workersAvailable[i] : null;
     const individualTask = {
       ...task,
       taskId: `${task.taskId}-mapper${i}`,
-      numWorker: worker.worker_num,
+      numWorker: isAssigned ? worker.worker_num : null,
     };
     clientRegistry.addSubTask(task.clientId, task.taskId, individualTask);
     const clientTask = clientRegistry.getClientTask(task.clientId, task.taskId);
@@ -235,7 +237,18 @@ function dispatchMappers(task) {
     // );
     //console.log("CLIENT TASK:", clientTask2);
     //clientRegistry.addTask(`${task.taskId}-mapper${i}`, individualTask);
-    reserveWorkerAndSendTask(worker, individualTask);
+
+    if (isAssigned) {
+      // Send to worker i
+      reserveWorkerAndSendTask(worker, individualTask);
+    } else {
+      // No worker now → enqueue for later
+      taskQueue.push({
+        clientId: task.clientId,
+        taskId: individualTask.taskId,
+      });
+    }
+    //reserveWorkerAndSendTask(worker, individualTask);
   }
 
   // clientRegistry.getClientTask(task.clientId, task.taskId).stopwatch.start(); // Start stopwatch for the task
@@ -246,17 +259,17 @@ function dispatchMappers(task) {
  * Dispatches reduce tasks to available workers.
  */
 function dispatchReducers(task) {
-  const numAvailableWorkers = workerRegistry.getTotalAvailableWorkers();
+  //const numAvailableWorkers = workerRegistry.getTotalAvailableWorkers();
   const numReducers = task.numReducers;
 
-  if (numReducers > numAvailableWorkers) {
-    console.log(
-      `🕒 Not enough workers for reduce phase of task ${task.taskId} from client ${task.clientId}`
-    );
-    console.log("Required reducers:", numReducers);
-    console.log("Available workers:", numAvailableWorkers);
-    return false;
-  }
+  // if (numReducers > numAvailableWorkers) {
+  //   console.log(
+  //     `🕒 Not enough workers for reduce phase of task ${task.taskId} from client ${task.clientId}`
+  //   );
+  //   console.log("Required reducers:", numReducers);
+  //   console.log("Available workers:", numAvailableWorkers);
+  //   return false;
+  // }
   // task.arg is in the format [ [ “…_0.txt”, “…_1.txt”, … ],  // mapper 0
   //                         [ “…_0.txt”, “…_1.txt”, … ],     // mapper 1
   //                         …                          ]    // mapper m
@@ -268,6 +281,8 @@ function dispatchReducers(task) {
 
     for (let r = 0; r < numReducers; r++) {
       const reducerArgs = [];
+      const isAssigned = r < workersAvailable.length;
+      const worker = isAssigned ? workersAvailable[r] : null;
 
       for (const [i, mapperFiles] of argsMatrix.entries()) {
         if (!Array.isArray(mapperFiles)) {
@@ -286,12 +301,19 @@ function dispatchReducers(task) {
         ...task,
         taskId: `${task.taskId}-reducer${r}`,
         arg: reducerArgs,
-        numWorker: workersAvailable[r].worker_num,
+        numWorker: isAssigned ? worker.worker_num : null,
       };
       clientRegistry.addSubTask(task.clientId, task.taskId, reducerTask);
 
       //clientRegistry.addTask(`${task.taskId}-reducer${r}`, reducerTask);
-      reserveWorkerAndSendTask(workersAvailable[r], reducerTask);
+      if (isAssigned) {
+        // assign to available worker r
+        reserveWorkerAndSendTask(workersAvailable[r], reducerTask);
+      } else {
+        // no free worker → enqueue
+        taskQueue.push({ clientId: task.clientId, taskId: reducerTask.taskId });
+      }
+      //reserveWorkerAndSendTask(workersAvailable[r], reducerTask);
     }
   } else {
     const reducerTask = {
