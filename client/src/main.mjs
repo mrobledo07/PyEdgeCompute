@@ -40,7 +40,14 @@ async function main() {
   }
   console.log("🕒 Stopwatch started for task:", clientId);
   const sentTime = Date.now() / 1000; // Convert to seconds
-  connectToWebSocket(CONFIG.WS_ORCH, clientId, maxTasks, stopwatches, sentTime);
+  connectToWebSocket(
+    CONFIG.WS_ORCH,
+    clientId,
+    maxTasks,
+    stopwatches,
+    sentTime,
+    CONFIG.OUT_DIR
+  );
 }
 
 main();

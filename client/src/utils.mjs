@@ -3,15 +3,19 @@ function parseArgs() {
   const args = process.argv.slice(2);
   const result = {};
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--config") {
-      result.configPath = args[i + 1];
-      i++;
-    } else if (args[i] === "--orch") {
-      result.orchestrator = args[i + 1];
-      i++;
-    } else if (args[i] === "--client_id") {
-      result.client_id = args[i + 1];
-      i++;
+    switch (args[i]) {
+      case "--config":
+        result.configPath = args[++i];
+        break;
+      case "--orch":
+        result.orchestrator = args[++i];
+        break;
+      case "--client_id":
+        result.client_id = args[++i];
+        break;
+      case "--outdir":
+        result.outdir = args[++i];
+        break;
     }
   }
   return result;
@@ -55,7 +59,7 @@ function getOrchestratorUrls(input) {
 }
 
 export function obtainArgs(CONFIG) {
-  const { configPath, orchestrator, client_id } = parseArgs();
+  const { configPath, orchestrator, client_id, outdir } = parseArgs();
 
   if (client_id) {
     console.log("FUNCTIONALITY NOT IMPLEMENTED YET");
@@ -83,6 +87,6 @@ export function obtainArgs(CONFIG) {
   CONFIG.HTTP_ORCH = urls.http;
   CONFIG.WS_ORCH = urls.ws;
   CONFIG.CONFIG_PATH = configPath;
-
+  CONFIG.OUT_DIR = outdir || null;
   console.log(urls);
 }

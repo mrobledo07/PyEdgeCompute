@@ -2,6 +2,8 @@
 import axios from "axios";
 import WebSocket from "ws";
 import readline from "readline/promises";
+import fs from "fs";
+import path from "path";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -86,12 +88,21 @@ function printMetadata(metadata) {
   });
 }
 
+/**
+ * @param {string} wsUrl
+ * @param {string} clientId
+ * @param {number} maxTasks
+ * @param {Stopwatch[]} stopwatches
+ * @param {number} sentTime
+ * @param {string|null} outDir
+ */
 export function connectToWebSocket(
   wsUrl,
   clientId,
   maxTasks,
   stopwatches,
-  sentTime
+  sentTime,
+  outDir = null
 ) {
   const ws = new WebSocket(`${wsUrl}?client_id=${clientId}`);
   let tasksExecuted = 0;
@@ -103,7 +114,7 @@ export function connectToWebSocket(
     );
   });
 
-  ws.on("message", (data) => {
+  ws.on("message", async (data) => {
     try {
       const parsedData = JSON.parse(data.toString());
       if (!parsedData) {
@@ -153,6 +164,30 @@ export function connectToWebSocket(
           console.log(
             `⏱️ Execution time: ${executionTimeClient}s (sent at ${sentTime}, received at ${receivedTime})`
           );
+
+          let base = task.type;
+          if (typeof task.numMappers === "number") {
+            base += `_m${task.numMappers}`;
+          }
+          if (typeof task.numReducers === "number") {
+            base += `_r${task.numReducers}`;
+          }
+          const filename = `${base}.json`;
+          if (outDir) {
+            try {
+              await fs.promises.mkdir(outDir, { recursive: true });
+              const filePath = path.join(outDir, filename);
+              await fs.promises.writeFile(
+                filePath,
+                JSON.stringify(task, null, 2),
+                "utf-8"
+              );
+              console.log(`💾 Saved task output to ${filePath}`);
+            } catch (err) {
+              console.error("❌ Failed to write output file:", err.message);
+            }
+          }
+
           printTaskObject(task);
           // console.log(`Status: ${task.status}`);
           // console.log(`Result: ${task.result}`);
