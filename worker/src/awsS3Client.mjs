@@ -1,17 +1,41 @@
 import { S3Client } from "@aws-sdk/client-s3";
+import { fromInstanceMetadata } from "@aws-sdk/credential-provider-imds";
+
 //import "dotenv/config";
 
 let s3Client;
 
-export function createAwsS3Client() {
+// export function createAwsS3Client() {
+//   s3Client = new S3Client({
+//     region: "eu-north-1",
+//     // credentials: {
+//     //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//     //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//     //   sessionToken: process.env.AWS_SESSION_TOKEN,
+//     // },
+//   });
+// }
+
+export async function createAwsS3Client() {
+  // Usamos fromInstanceMetadata con reintentos internos
+  const credentialProvider = fromInstanceMetadata({
+    timeout: 1000, // milisegundos antes de timeout en IMDS
+    maxRetries: 3, // reintentos de credenciales
+  });
+
   s3Client = new S3Client({
     region: "eu-north-1",
-    // credentials: {
-    //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    //   sessionToken: process.env.AWS_SESSION_TOKEN,
-    // },
+    credentials: credentialProvider,
   });
+
+  // Forzamos la obtención de credenciales *antes* de usar el client
+  try {
+    await s3Client.config.credentials();
+    console.log("[INFO awsS3Client] AWS credentials loaded successfully");
+  } catch (err) {
+    console.error("[ERROR awsS3Client] Failed to load AWS credentials:", err);
+    throw err;
+  }
 }
 
 export function getAwsS3Client() {

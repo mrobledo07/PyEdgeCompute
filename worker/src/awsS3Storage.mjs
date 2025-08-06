@@ -13,7 +13,7 @@ import {
 import { CONFIG } from "./main.mjs";
 
 export async function getTextFromS3(fileUrl, offset = -1, numMappers = -1) {
-  createAwsS3Client();
+  await createAwsS3Client();
   const { bucket, objectName } = obtainBucketAndObjectName(fileUrl);
   const client = getAwsS3Client();
 
@@ -74,7 +74,7 @@ export async function getSerializedResults(results) {
 }
 
 export async function setSerializedResult(task, result) {
-  createAwsS3Client();
+  await createAwsS3Client();
 
   // Use STORAGE_ORCH as base URL, assuming like "https://bucket.s3.region.amazonaws.com"
   const bucket = obtainBucketName(CONFIG.STORAGE);
