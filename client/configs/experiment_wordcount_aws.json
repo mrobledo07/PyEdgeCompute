@@ -1,0 +1,10 @@
+{
+  "type": "mapreducewordcount",
+  "code": [
+    "client/codes/map_wordcount.py",
+    "client/codes/reduce_wordcount.py"
+  ],
+  "args": [
+    ["s3://clientbucketforstoringinputs/concatenated_gutenberg_books.txt", 10, 1]
+  ]
+}
