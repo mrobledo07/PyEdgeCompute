@@ -1,12 +1,8 @@
-# combined_report.py
+# combined_report_no_csv.py
 """
-Combined MapReduce analysis (v4):
-- More robust filename parsing to extract m and r from many patterns
-  (examples supported: mapreduce_wordcount_m10_r1.json,
-   mapreducewordcount_m10_r1.json, mapreduce-wordcount-m10-r1.json, etc.)
-- Prints a short warning when it had to fall back to a heuristic
-- Generates plots per-type (wall-clock, max-phase, CPU vs IO, latency, speedup, efficiency)
-- Saves per-type CSV and a consolidated summary_all.csv
+Combined MapReduce analysis (plots only):
+- Same analysis as before
+- Only generates PNG plots; no CSVs are written
 """
 
 import argparse
@@ -14,15 +10,9 @@ import glob
 import json
 import os
 import re
-import csv
 import matplotlib.pyplot as plt
 
 def parse_m_r_from_filename(base):
-    """
-    Try multiple strategies to extract (m, r) from a filename.
-    Returns (m, r, method) where method is a string describing which strategy matched.
-    """
-    # Strategy 1: _m<num>_r<num> or -m<num>-r<num> or .m<num>.r<num>
     m = r = None
     method = None
     m_r = re.search(r"[ _.-]m(\d+)[ _.-]r(\d+)", base, flags=re.IGNORECASE)
@@ -33,7 +23,6 @@ def parse_m_r_from_filename(base):
         except Exception:
             pass
 
-    # Strategy 2: separate _m<num> and _r<num>
     m_s = re.search(r"[ _.-]m(\d+)", base, flags=re.IGNORECASE)
     r_s = re.search(r"[ _.-]r(\d+)", base, flags=re.IGNORECASE)
     if m_s and r_s:
@@ -43,7 +32,6 @@ def parse_m_r_from_filename(base):
         except Exception:
             pass
 
-    # Strategy 3: find all occurrences like m<num> and r<num> and take the last ones
     m_all = re.findall(r"m(\d+)", base, flags=re.IGNORECASE)
     r_all = re.findall(r"r(\d+)", base, flags=re.IGNORECASE)
     if m_all and r_all:
@@ -53,7 +41,6 @@ def parse_m_r_from_filename(base):
         except Exception:
             pass
 
-    # Strategy 4: explicit patterns like ..._m10r1 or ...m10r1 (no separators)
     mr = re.search(r"m(\d+)r(\d+)", base, flags=re.IGNORECASE)
     if mr:
         try:
@@ -66,9 +53,6 @@ def parse_m_r_from_filename(base):
 
 
 def analyze_file(path):
-    """Parse one JSON file and return metrics.
-    Returns: (full_type, m, r, wall_clock, max_phase_sum, total_cpu, total_io, num_tasks, parse_method)
-    """
     with open(path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     meta = data.get("metadata", {})
@@ -107,12 +91,10 @@ def analyze_file(path):
 
     base = os.path.basename(path)
     full_type = None
-    # type extraction: prefer something starting with mapreduce... before _m
     t_match = re.match(r"(mapreduce[\w-]*)[_.-]m", base, flags=re.IGNORECASE)
     if t_match:
         full_type = t_match.group(1)
     else:
-        # try to extract mapreduce word at start
         t_match2 = re.match(r"(mapreduce[\w-]*)", base, flags=re.IGNORECASE)
         full_type = t_match2.group(1) if t_match2 else base
 
@@ -180,7 +162,6 @@ def main():
         return
 
     grouped = {}
-    all_records = []
     for path in files:
         try:
             full_type, m, r, wc, mp, tc, ti, nt, method = analyze_file(path)
@@ -190,7 +171,6 @@ def main():
 
         if m is None or r is None:
             print(f"Skipping {path}: cannot parse m/r from filename (tried method {method}).")
-            # try relaxed fallback: try parse again using looser regex on basename
             base = os.path.basename(path)
             m_f = re.findall(r"m(\d+)", base, flags=re.IGNORECASE)
             r_f = re.findall(r"r(\d+)", base, flags=re.IGNORECASE)
@@ -206,8 +186,6 @@ def main():
             continue
 
         grouped.setdefault(full_type, []).append((m,r,wc,mp,tc,ti,nt,os.path.basename(path)))
-        all_records.append({"type":full_type,"m":m,"r":r,"wall_clock":wc,"max_phase_sum":mp,
-                            "total_cpu":tc,"total_io":ti,"num_tasks":nt,"file":os.path.basename(path)})
 
     for full_type, recs in grouped.items():
         if not recs:
@@ -219,8 +197,8 @@ def main():
         total_cpus = [tc for _,_,_,_,tc,_,_,_ in recs]
         total_ios = [ti for _,_,_,_,_,ti,_,_ in recs]
         num_tasks = [nt for _,_,_,_,_,_,nt,_ in recs]
-        filenames = [fn for _,_,_,_,_,_,_,fn in recs]
 
+        # Generate plots
         plot_line_configs(configs, wall_clocks, "wall-clock (s)", os.path.join(args.results_dir,f"{full_type}_wall_clock.png"))
         plot_line_configs(configs, max_phases, "max-phase sum (s)", os.path.join(args.results_dir,f"{full_type}_max_phase.png"))
         plot_grouped_bar(configs, [total_cpus,total_ios], ["total_cpu","total_io"], "seconds", os.path.join(args.results_dir,f"{full_type}_cpu_vs_io.png"))
@@ -239,22 +217,7 @@ def main():
         plot_line_configs(configs, speedups, "speedup (x)", os.path.join(args.results_dir,f"{full_type}_speedup.png"))
         plot_line_configs(configs, efficiency, "efficiency", os.path.join(args.results_dir,f"{full_type}_efficiency.png"))
 
-        csv_path = os.path.join(args.results_dir,f"{full_type}_summary.csv")
-        with open(csv_path,'w',newline='',encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['file','config','m','r','wall_clock','max_phase_sum','total_cpu','total_io','num_tasks',
-                             'latency_diff','latency_ratio','speedup','processors','efficiency'])
-            for fn,(m,r),wc,mp,tc,ti,nt,ld,lr,sp,p,ef in zip(filenames,configs,wall_clocks,max_phases,total_cpus,total_ios,num_tasks,latency_diff,latency_ratio,speedups,processors,efficiency):
-                writer.writerow([fn,f"({m},{r})",m,r,wc,mp,tc,ti,nt,ld,lr,sp,p,ef])
-        print(f"Generated plots and CSV for {full_type}")
-
-    csv_out = os.path.join(args.results_dir,"summary_all.csv")
-    with open(csv_out,'w',newline='',encoding='utf-8') as f:
-        writer = csv.writer(f)
-        writer.writerow(['file','type','m','r','wall_clock','max_phase_sum','total_cpu','total_io','num_tasks'])
-        for r in all_records:
-            writer.writerow([r['file'],r['type'],r['m'],r['r'],r['wall_clock'],r['max_phase_sum'],r['total_cpu'],r['total_io'],r['num_tasks']])
-    print("Saved consolidated CSV to", csv_out)
+        print(f"Generated plots for {full_type}")
 
 
 if __name__ == "__main__":
