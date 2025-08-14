@@ -1,0 +1,4 @@
+file,type,m,r,wall_clock,max_phase_sum,total_cpu,total_io,num_tasks
+mapreduceterasort_m10_r5.json,mapreduceterasort,10,5,7.638000011444092,6.453999757766724,12.9845,7.7118,15
+mapreduceterasort_m15_r5.json,mapreduceterasort,15,5,8.818000078201294,7.947999954223633,11.9424,9.839699999999999,20
+mapreduceterasort_m5_r5.json,mapreduceterasort,5,5,4.958999872207642,4.948999881744385,17.2008,5.110000000000001,10

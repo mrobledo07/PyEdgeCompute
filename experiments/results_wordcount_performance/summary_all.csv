@@ -1,0 +1,4 @@
+file,type,m,r,wall_clock,max_phase_sum,total_cpu,total_io,num_tasks
+mapreducewordcount_m10_r1.json,mapreducewordcount,10,1,33.723999977111816,29.234999895095825,44.554,11.8203,11
+mapreducewordcount_m15_r1.json,mapreducewordcount,15,1,39.513999938964844,36.459999799728394,31.863100000000003,21.497500000000006,16
+mapreducewordcount_m5_r1.json,mapreducewordcount,5,1,12.14300012588501,12.138000011444092,40.97919999999999,4.2241,6
