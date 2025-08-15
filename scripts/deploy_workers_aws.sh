@@ -13,7 +13,10 @@ INSTANCE_ROLE="MyEC2S3AccessRole"
 KEY_PAIR_NAME="worker-keys" # Use your .pem key name
 #AMI_ID="ami-062abdb4b1d1cc0bf" # Use the worker AMI ID old (without aws credentials provider timeout)
 # AMI_ID="ami-0e1ac9f630b80a8df" AMI creates s3client each time
-AMI_ID="ami-0b187131c091d4904"
+# AMI_ID="ami-0b187131c091d4904" <- the final good one
+# AMI_ID="ami-0f1022304ca11e5c0" <- same problem (aws s3 contention fix)
+# AMI_ID="ami-0b16da4a8fefbe240" <- same problem (cache lookup DNS)
+AMI_ID="ami-09f040311e96b4d5d"
 INSTANCE_TYPE="t3.medium"
 
 aws ec2 run-instances \

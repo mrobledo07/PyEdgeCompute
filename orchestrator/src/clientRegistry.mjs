@@ -139,6 +139,17 @@ class ClientRegistry {
     }
   }
 
+  markTaskPending(clientId, taskId) {
+    this.lock();
+    try {
+      const task = this.clients.get(clientId).tasks.get(taskId);
+      if (!task) return;
+      task.state = "pending";
+    } finally {
+      this.unlock();
+    }
+  }
+
   markTaskDone(clientId, taskId) {
     this.lock();
     try {

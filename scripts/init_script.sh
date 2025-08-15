@@ -12,4 +12,4 @@ source "$NVM_DIR/nvm.sh"
 # de manera que usamos & para que init_script pueda continuar con la ejecución
 # y usamos nohup para que cuando el proceso shell de init_script acabe, no elimine el proceso hijo de node
 
-nohup node src/main.mjs --orch http://ec2-13-48-55-235.eu-north-1.compute.amazonaws.com:3000 --storage s3://orchestratorfororchestratingworkers > /var/log/my-node-app.log 2>&1 &
+nohup node src/main.mjs --orch http://ec2-51-21-150-48.eu-north-1.compute.amazonaws.com:3000 --storage s3://orchestratorfororchestratingworkers > /var/log/my-node-app.log 2>&1 &

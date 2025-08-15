@@ -134,6 +134,7 @@ export function handleWorkerSocket(ws, workerId) {
           parseFloat(msg.cpuTime) || 0,
           parseFloat(msg.writeTime) || 0,
           parseFloat(msg.endTime) || 0,
+          msg.workerId || 0,
         ],
       };
       clientTask.subTasksResults.push(metadata);
@@ -158,6 +159,7 @@ export function handleWorkerSocket(ws, workerId) {
           parseFloat(msg.cpuTime) || 0,
           parseFloat(msg.writeTime) || 0,
           parseFloat(msg.endTime) || 0,
+          msg.workerId || 0,
         ],
       };
       infoTask.resultsMappers.push(msg.result);
@@ -251,6 +253,7 @@ export function handleWorkerSocket(ws, workerId) {
           parseFloat(msg.cpuTime) || 0,
           parseFloat(msg.writeTime) || 0,
           parseFloat(msg.endTime) || 0,
+          msg.workerId || 0,
         ],
       };
       infoTask.resultsReducers.push(msg.result);

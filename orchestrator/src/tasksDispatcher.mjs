@@ -333,41 +333,25 @@ function dispatchReducers(task) {
  * Assigns a task to a worker and sends it via WebSocket.
  */
 function reserveWorkerAndSendTask(worker, task) {
-  //worker.availableWorkers--;
-  //worker.tasksAssignated.push(task);
-  //sortWorkers();
-
+  workerRegistry.assignTaskToWorker(
+    worker.worker_id,
+    task.clientId,
+    task.taskId
+  ); // Decrement first
+  clientRegistry.markTaskRunning(task.clientId, task.taskId, worker.worker_id);
   worker.ws.send(JSON.stringify(task), (err) => {
     if (err) {
       console.error(
-        `❌ Failed to send task to ${worker.worker_id}:`,
-        err.message
+        `❌ Failed to send task to worker ${worker.worker_id}: ${err.message}`
       );
+      workerRegistry.completeTaskOnWorker(worker.worker_id, task.taskId); // Increment back (as if completed/failed)
+      taskQueue.push({ clientId: task.clientId, taskId: task.taskId }); // Re-queue
+      clientRegistry.markTaskPending(task.clientId, task.taskId);
       throw new Error(
         `Failed to send task to worker ${worker.worker_id}. Error: ${err.message}`
       );
-      // Recover worker and re-queue task
-      // worker.availableWorkers++;
-      // worker.tasksAssignated = worker.tasksAssignated.filter(
-      //   (t) => t.taskId !== task.taskId || t.arg !== task.arg
-      // );
-      // taskQueue.unshift(task);
-      // sortWorkers();
-      //workerRegistry.completeTaskOnWorker(worker.worker_id, task.taskId);
     } else {
-      workerRegistry.assignTaskToWorker(
-        worker.worker_id,
-        task.clientId,
-        task.taskId
-      );
-      clientRegistry.markTaskRunning(
-        task.clientId,
-        task.taskId,
-        worker.worker_id
-      );
-      console.log(
-        `✅ Sent task ${task.taskId} from client ${task.clientId} with arg ${task.arg} to worker ${worker.worker_id}`
-      );
+      console.log(`✅ Sent task ${task.taskId} ...`);
     }
   });
 }

@@ -14,7 +14,7 @@ import {
 
 import { getPyodide } from "./pyodideRuntime.mjs";
 
-export async function executeTask(task, ws, stopWatch) {
+export async function executeTask(task, ws, stopWatch, workerId) {
   const pyodide = getPyodide();
   stopWatch.start();
   const initTime = Date.now() / 1000;
@@ -129,6 +129,7 @@ result
 
     ws.send(
       JSON.stringify({
+        workerId,
         clientId: task.clientId,
         taskId: task.taskId,
         status: "done",
@@ -148,6 +149,7 @@ result
     console.error(e);
     ws.send(
       JSON.stringify({
+        workerId,
         clientId: task.clientId,
         taskId: task.taskId,
         status: "error",

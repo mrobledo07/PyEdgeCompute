@@ -1,0 +1,37 @@
+{
+  "message_type": "task_result",
+  "type": "mapreducewordcount",
+  "numMappers": 2,
+  "numReducers": 1,
+  "taskId": "7843b489-4253-45f7-86ab-fd3f8e53e070",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/0173b982-0ad8-4a55-8ca9-6597205921b3/7843b489-4253-45f7-86ab-fd3f8e53e070/reducer/0.txt"
+  ],
+  "metadata": {
+    "7843b489-4253-45f7-86ab-fd3f8e53e070-mapper1": [
+      1755274586.149,
+      1.1192,
+      12.2806,
+      0.0557,
+      1755274599.606,
+      "d789aaae-a092-47c8-8eb3-0586a933c4af"
+    ],
+    "7843b489-4253-45f7-86ab-fd3f8e53e070-mapper0": [
+      1755274586.149,
+      1.1152,
+      20.8255,
+      0.3906,
+      1755274608.481,
+      "0cb12916-4aac-4f42-8dcc-42b302c77085"
+    ],
+    "7843b489-4253-45f7-86ab-fd3f8e53e070-reducer": [
+      1755274608.484,
+      0.4129,
+      1.786,
+      0.0404,
+      1755274610.724,
+      "af633532-0f42-4cb0-9df2-79edac22feae"
+    ]
+  }
+}

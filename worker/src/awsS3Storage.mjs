@@ -4,7 +4,6 @@ import {
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
 import {
-  createAwsS3Client,
   createAwsS3ClientOnce,
   getAwsS3Client,
   obtainBucketAndObjectName,

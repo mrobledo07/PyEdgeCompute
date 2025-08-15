@@ -9,6 +9,8 @@ import { CONFIG } from "./main.mjs";
 let workerId;
 let ws;
 let stopWatch;
+let isExecuting = 0;
+let numWorkers = 1;
 
 let retryAttempts = 0;
 const MAX_RETRIES = 20;
@@ -16,7 +18,7 @@ const MAX_RETRIES = 20;
 export async function registerWorker() {
   try {
     const { data } = await axios.post(`${CONFIG.HTTP_ORCH}/register_worker`, {
-      numWorkers: 1,
+      numWorkers,
     });
     workerId = data.worker_id;
     ws = new WebSocket(`${CONFIG.WS_ORCH}?worker_id=${workerId}`);
@@ -77,10 +79,25 @@ export async function registerWorker() {
         );
         return;
       }
+
+      if (isExecuting === numWorkers) {
+        console.error("❌ Worker already executing tasks");
+        ws.send(
+          JSON.stringify({
+            clientId,
+            taskId,
+            status: "error",
+            result: "Worker already executing tasks",
+          })
+        );
+        return;
+      }
+
       console.log(
         `▶️ Worker ${workerId} received task ${taskId} from client ${clientId} with arg ${arg}`
       );
-      await executeTask(task, ws, stopWatch); // <-- Execute the task received from the orchestrator
+      await executeTask(task, ws, stopWatch, workerId); // <-- Execute the task received from the orchestrator
+      isExecuting -= 1;
     } catch (err) {
       console.error("❌ Error parsing message from ORCHESTRATOR:", err.message);
     }

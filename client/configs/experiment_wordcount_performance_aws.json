@@ -5,8 +5,6 @@
     "client/codes/reduce_wordcount.py"
   ],
   "args": [
-    ["s3://clientbucketforstoringinputs/concatenated_gutenberg_books.txt", 5, 1],
-      ["s3://clientbucketforstoringinputs/concatenated_gutenberg_books.txt", 10, 1],
-    ["s3://clientbucketforstoringinputs/concatenated_gutenberg_books.txt", 15, 1]
+    ["s3://clientbucketforstoringinputs/example1.txt", 15, 1]
   ]
 }
