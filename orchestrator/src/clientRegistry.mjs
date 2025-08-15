@@ -30,7 +30,6 @@ class ClientRegistry {
         numPendingTasks: numTasks,
         tasks: new Map(),
       });
-      console.log(`REGISTERED CLIENT ${clientId} with ${numTasks} tasks`);
     } finally {
       this.unlock();
     }
@@ -94,8 +93,6 @@ class ClientRegistry {
         //stopwatch: task.stopwatch,
         //executionTime: task.executionTime || 0,
       });
-      console.log(`Added task ${task} to client ${clientId}`);
-      console.log(client.tasks);
     } finally {
       this.unlock();
     }
@@ -118,10 +115,6 @@ class ClientRegistry {
 
       // Añadir la subtarea al array
       mainTask.subTasks.push(subTask);
-      console.log(
-        `➕ Added subtask ${subTask.taskId} to ${taskId} of client ${clientId}`
-      );
-      console.log(mainTask.subTasks);
     } finally {
       this.unlock();
     }
@@ -201,18 +194,12 @@ class ClientRegistry {
   getClientSubTask(clientId, taskId, subTaskId) {
     if (this.isLocked) throw new Error("ClientRegistry is locked.");
 
-    console.log("CLIENT HELLO");
     const client = this.clients.get(clientId);
     if (!client) return null;
-    console.log(client);
 
-    console.log("TASK HELLO");
     const mainTask = client.tasks.get(taskId);
     if (!mainTask) return null;
-    console.log(mainTask);
 
-    console.log("TRYING TO FIND SUBTASK");
-    console.log(mainTask.subTasks);
     return (
       mainTask.subTasks.find((subTask) => subTask.taskId === subTaskId) || null
     );

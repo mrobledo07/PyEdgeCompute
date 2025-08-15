@@ -33,9 +33,6 @@ export function processTaskQueue() {
     }
 
     if (!task) {
-      console.warn(
-        `⚠️ Task not found for client ${clientId} with ID ${taskId}`
-      );
       // Optional: remove from queue to avoid blocking
       taskQueue.shift();
       continue;
@@ -60,14 +57,10 @@ export function processTaskQueue() {
       //   return numAvailableWorkers >= task.numReducers;
       // }
 
-      console.log(`Available workers: ${numAvailableWorkers}`);
       return numAvailableWorkers > 0;
     })();
 
     if (!canDispatch) {
-      console.log(
-        `🕒 No available workers. Task "${task.arg}:${next.taskId}" remains in queue.`
-      );
       break;
     }
     // Now remove the task from the queue
@@ -150,25 +143,15 @@ export function dispatchTask(task) {
     const worker = workerRegistry.getBestWorkers(1)[0];
     if (worker) {
       if (Array.isArray(task.code) && task.code.length > 1) {
-        console.warn(
-          `⚠️ Task ${task.taskId} has multiple code blocks. Using the first one.`
-        );
         task.code = task.code[0]; // Use first code block
       }
       //clientRegistry.getClientTask(task.clientId, oldTaskId).stopwatch.start();
       reserveWorkerAndSendTask(worker, task);
     } else {
-      console.log(
-        `🕒 No available workers. Queuing task ${task.taskId} with arg ${task.arg} from client ${task.clientId}`
-      );
       taskQueue.push({ clientId: task.clientId, taskId: task.taskId });
     }
     return true;
   } catch (err) {
-    console.error(
-      `❌ Error while dispatching task ${task.taskId}: ${err.message}`
-    );
-    console.error(err);
     return false; // Indicate failure
   } // opcional: stack trace completa}
 }
@@ -341,9 +324,6 @@ function reserveWorkerAndSendTask(worker, task) {
   clientRegistry.markTaskRunning(task.clientId, task.taskId, worker.worker_id);
   worker.ws.send(JSON.stringify(task), (err) => {
     if (err) {
-      console.error(
-        `❌ Failed to send task to worker ${worker.worker_id}: ${err.message}`
-      );
       workerRegistry.completeTaskOnWorker(worker.worker_id, task.taskId); // Increment back (as if completed/failed)
       taskQueue.push({ clientId: task.clientId, taskId: task.taskId }); // Re-queue
       clientRegistry.markTaskPending(task.clientId, task.taskId);
@@ -351,7 +331,6 @@ function reserveWorkerAndSendTask(worker, task) {
         `Failed to send task to worker ${worker.worker_id}. Error: ${err.message}`
       );
     } else {
-      console.log(`✅ Sent task ${task.taskId} ...`);
     }
   });
 }

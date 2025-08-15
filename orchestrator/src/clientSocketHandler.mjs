@@ -7,9 +7,6 @@ import taskQueue from "./taskQueue.mjs";
 
 function sendTaskToClient(task, ws) {
   if (!ws || ws.readyState !== ws.OPEN) {
-    console.warn(
-      `WebSocket is not open for client. Cannot send task ${task.taskId}`
-    );
     return;
   }
 
@@ -39,15 +36,10 @@ function sendTaskToClient(task, ws) {
   try {
     ws.send(JSON.stringify(message));
     task.sent = true;
-    console.log(`✅ Task ${task.taskId} sent to client.`);
-  } catch (error) {
-    console.error(`❌ Failed to send task ${task.taskId}:`, error);
-  }
+  } catch (error) {}
 }
 
 export function handleClientSocket(ws, clientId) {
-  console.log(`🔌 Client connected ${clientId}`);
-
   //taskClients.get(taskId).ws = ws;
   //const client = (clientRegistry.getClient(clientId).ws = ws);
   clientRegistry.getClient(clientId).ws = ws;
@@ -62,7 +54,6 @@ export function handleClientSocket(ws, clientId) {
   }
 
   ws.on("close", () => {
-    console.log(`❌ Client disconnected ${clientId}`);
     // if (client?.numTasks > 0) {
     //   //taskQueue = taskQueue.filter((task) => task.taskId !== taskId);
     //   const clientTasks = clientRegistry.getClientTasks(clientId);

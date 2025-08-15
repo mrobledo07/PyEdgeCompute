@@ -8,15 +8,12 @@ import taskQueue from "./taskQueue.mjs";
 import clientRegistry from "./clientRegistry.mjs";
 
 export function handleWorkerSocket(ws, workerId) {
-  console.log(`🔌 Worker connected with ID ${workerId}`);
-
   // const worker = workers.find((w) => w.worker_id === workerId);
   const worker = workerRegistry.getWorkerById(workerId);
   worker.ws = ws;
   processTaskQueue();
 
   ws.on("close", () => {
-    console.log(`❌ Worker disconnected with ID ${workerId}`);
     // const worker = workers.find((w) => w.worker_id === workerId);
     const worker = workerRegistry.getWorkerById(workerId);
     if (worker && worker?.tasksAssignated.len > 0) {
@@ -46,18 +43,9 @@ export function handleWorkerSocket(ws, workerId) {
           };
           requeuedTasks.push(`${requeuedTask.clientId}:${requeuedTask.taskId}`);
           taskQueue.push(requeuedTask);
-          console.log(`🔁 Re-queued task: ${clientId}:${taskId}`);
         } else {
-          console.warn(
-            `⚠️ Could not find task or subtask ${taskId} for client ${clientId}`
-          );
         }
       }
-
-      console.log(
-        `🔄 Re-queued tasks from disconnected worker ${workerId}:`,
-        requeuedTasks
-      );
     }
     workerRegistry.removeWorker(workerId);
     //workers = workers.filter((w) => w.worker_id !== workerId);
@@ -76,28 +64,18 @@ export function handleWorkerSocket(ws, workerId) {
     // let cpuTime = parseFloat(msg.cpuTime) || 0;
     // let ioTime = parseFloat(msg.ioTime) || 0;
 
-    console.log(`📨 Message from worker ${workerId}:`, msg);
     //const worker = workers.find((w) => w.worker_id === workerId);
     const worker = workerRegistry.getWorkerById(workerId);
 
     const completed = workerRegistry.completeTaskOnWorker(workerId, msg.taskId);
     if (completed) {
-      console.log(
-        `✨ Worker ${workerId} now has ${worker.availableWorkers} available processors.`
-      );
     } else {
-      console.error(
-        `❌ Worker ${workerId} not found or task completion failed.`
-      );
       return;
     }
     const cleanedTaskId = msg.taskId.replace(/-(mapper\d+|reducer\d*?)$/, "");
 
     const client = clientRegistry.getClient(msg.clientId);
     if (!client) {
-      console.warn(
-        `⚠️ Tried to access task of non-existent client ${msg.clientId}`
-      );
       return;
     }
     const clientTask = clientRegistry.getClientTask(
@@ -105,16 +83,10 @@ export function handleWorkerSocket(ws, workerId) {
       cleanedTaskId
     );
     if (!clientTask) {
-      console.error(
-        `❌ Task ${cleanedTaskId} for client ${msg.clientId} not found in registry.`
-      );
       return;
     }
 
     if (clientTask.state === "done" || clientTask.state === "error") {
-      console.warn(
-        `⚠️ Task ${cleanedTaskId} for client ${msg.clientId} already marked as ${clientTask.state}. Ignoring message.`
-      );
       return;
     }
 
@@ -165,15 +137,7 @@ export function handleWorkerSocket(ws, workerId) {
       infoTask.resultsMappers.push(msg.result);
       clientTask.subTasksResults.push(metadata);
       //mapreduceTasks.set(cleanedTaskId, infoTask);
-      console.log(
-        `📦 Worker ${workerId} completed a mapper for task ${cleanedTaskId}. Remaining: ${infoTask.numMappers}`
-      );
     }
-
-    // console.log(
-    //   ">> task COMPLETED after infoTask clients map keys:",
-    //   Array.from(clientRegistry.clients.keys())
-    // );
 
     //infoTask = mapreduceTasks.get(msg.taskId);
     if (infoTask && infoTask.numMappers === 0) {
@@ -209,17 +173,12 @@ export function handleWorkerSocket(ws, workerId) {
       // clientTask.stopwatch.stop(); // Stop stopwatch for the task
       // clientTask.executionTime += clientTask.stopwatch.getDuration();
       // infoTask.results = []; // Clear results for the next phase
-      console.log(
-        `🔄 Map stage completed for ${cleanedTaskId}. Starting reduce phase.`
-      );
+
       const dispatched = dispatchTask(reduceTask);
       if (!dispatched) {
         mapreduceTasks.delete(cleanedTaskId);
         msg.status = "error";
         msg.result = `Failed to dispatch reduce task for ${cleanedTaskId}. Task removed.`;
-        console.error(
-          `❌ Failed to dispatch reduce task for ${cleanedTaskId}. Task removed.`
-        );
       } else {
         return; // Exit early if reduce task was dispatched successfully
       }
@@ -278,11 +237,7 @@ export function handleWorkerSocket(ws, workerId) {
         //   Math.max(...infoTask.resultsMappers.map((r) => r[2]));
 
         mapreduceTasks.delete(cleanedTaskId);
-        console.log(`✅ All reducers for task ${cleanedTaskId} completed.`);
       } else {
-        console.log(
-          `📦 Reducer completed for ${cleanedTaskId}. Remaining: ${infoTask.numReducers}`
-        );
       }
     }
 
@@ -316,17 +271,12 @@ export function handleWorkerSocket(ws, workerId) {
 
     if (!infoTask) {
       if (msg.status === "done") {
-        console.log(`✅ Task ${msg.taskId} completed by worker ${workerId}.`);
-        console.log("🔍 Orchestrator got from worker:", msg);
         // console.log(
         //   ">> clients map keys in markdone:",
         //   Array.from(clientRegistry.clients.keys())
         // );
         clientRegistry.markTaskDone(msg.clientId, msg.taskId);
       } else if (msg.status === "error") {
-        console.error(
-          `❌ Error in task ${msg.taskId} from worker ${workerId}: ${msg.result}`
-        );
         clientRegistry.markTaskError(msg.clientId, cleanedTaskId, msg.result);
       }
 
@@ -402,30 +352,21 @@ export function handleWorkerSocket(ws, workerId) {
 
       if (client?.ws) {
         client.ws.send(JSON.stringify(jsonToSend));
-        console.log(`📦 Before sending: numTasks = ${client.numTasks}`);
         clientRegistry.setClientTask(msg.clientId, cleanedTaskId, {
           ...clientTask,
           ...jsonToSend,
           sent: true,
         });
-        console.log(
-          `📦 Sent result for task ${cleanedTaskId} to client ${msg.clientId}. Remaining tasks: ${client.numTasks}`
-        );
+
         if (clientRegistry.allTasksExecuted(msg.clientId)) {
           const clientTasks = clientRegistry.getClientTasks(msg.clientId);
           const taskIds = clientTasks.map((task) => task.taskId);
           taskQueue.remove(taskIds); // remove in case tasks are still pending
           clientRegistry.removeClient(msg.clientId);
 
-          console.log(`✅ All tasks for client ${msg.clientId} completed.`);
-          console.log(`🗑️ Client ${msg.clientId} removed from registry.`);
-
           client.ws.close();
         }
       } else {
-        console.error(
-          `❌ Client ${msg.clientId} for task ${msg.taskId} not found or disconnected.`
-        );
         clientRegistry.setClientTask(msg.clientId, cleanedTaskId, {
           ...clientTask,
           ...jsonToSend,

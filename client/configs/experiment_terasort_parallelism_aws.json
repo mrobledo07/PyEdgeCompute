@@ -5,9 +5,6 @@
     "client/codes/reduce_terasort.py"
   ],
   "args": [
-    ["s3://clientbucketforstoringinputs/terasort-240m", 5, 5],
-    ["s3://clientbucketforstoringinputs/terasort-240m", 10, 10],
-    ["s3://clientbucketforstoringinputs/terasort-240m", 15, 15],
-    ["s3://clientbucketforstoringinputs/terasort-240m", 20, 20]
+    ["s3://clientbucketforstoringinputs/terasort-240m", 50, 50]
   ]
 }
