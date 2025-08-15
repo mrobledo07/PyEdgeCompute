@@ -1,0 +1,97 @@
+{
+  "message_type": "task_result",
+  "type": "mapreduceterasort",
+  "numMappers": 5,
+  "numReducers": 5,
+  "taskId": "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/df6fd366-8144-45d9-8597-0b8b1e8bf30e/4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb/reducer4/4.txt",
+    "s3://orchestratorfororchestratingworkers/df6fd366-8144-45d9-8597-0b8b1e8bf30e/4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb/reducer0/0.txt",
+    "s3://orchestratorfororchestratingworkers/df6fd366-8144-45d9-8597-0b8b1e8bf30e/4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb/reducer3/3.txt",
+    "s3://orchestratorfororchestratingworkers/df6fd366-8144-45d9-8597-0b8b1e8bf30e/4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb/reducer2/2.txt",
+    "s3://orchestratorfororchestratingworkers/df6fd366-8144-45d9-8597-0b8b1e8bf30e/4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb/reducer1/1.txt"
+  ],
+  "metadata": {
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-mapper1": [
+      1755279199.457,
+      0.5953,
+      12.6001,
+      0.8426,
+      1755279213.737,
+      "fd4393ab-a15c-4cf2-95d3-81b53b7c3f6b"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-mapper3": [
+      1755279199.457,
+      0.6103,
+      12.6397,
+      0.8688,
+      1755279213.828,
+      "a78d116e-7fbc-4ea1-9a76-ad95a39abf58"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-mapper0": [
+      1755279199.457,
+      0.5834,
+      12.7064,
+      0.9015,
+      1755279213.892,
+      "82ff2fcc-4a95-4704-96bb-a99fe0594b2f"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-mapper2": [
+      1755279199.457,
+      0.6251,
+      12.732,
+      0.8386,
+      1755279213.895,
+      "c14dc41f-72c2-4c00-a089-ce1a4cdb8bb3"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-mapper4": [
+      1755279199.457,
+      0.6424,
+      13.151,
+      0.6922,
+      1755279214.188,
+      "faa31f39-996f-4148-80f2-2a1273bbddd3"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-reducer4": [
+      1755279214.19,
+      0.5632,
+      7.1265,
+      0.6445,
+      1755279222.525,
+      "cb926290-ffa2-438e-8765-e811dddc2921"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-reducer0": [
+      1755279214.19,
+      0.4933,
+      7.2552,
+      0.5936,
+      1755279222.541,
+      "4c15b88f-f7a1-4596-a599-23a6671b4c60"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-reducer3": [
+      1755279214.19,
+      0.5233,
+      7.4386,
+      0.6306,
+      1755279222.783,
+      "ccb21454-8c05-46c3-9269-793857a918dd"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-reducer2": [
+      1755279214.19,
+      0.5922,
+      7.2887,
+      0.7722,
+      1755279222.844,
+      "70fed87c-35cb-4000-b909-6a4aba8e7cb9"
+    ],
+    "4e7c45ce-62ed-4e9d-ae80-390a9b98d4fb-reducer1": [
+      1755279214.19,
+      0.5234,
+      7.7332,
+      0.6817,
+      1755279223.129,
+      "743fa340-0d95-40bb-b961-386832141560"
+    ]
+  }
+}
