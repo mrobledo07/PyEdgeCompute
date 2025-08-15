@@ -1,0 +1,267 @@
+{
+  "message_type": "task_result",
+  "type": "mapreduceterasort",
+  "numMappers": 15,
+  "numReducers": 15,
+  "taskId": "ea738722-f249-4248-b41b-f85f2b7aad62",
+  "status": "done",
+  "result": [
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer1/1.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer0/0.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer2/2.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer5/5.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer14/14.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer7/7.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer8/8.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer6/6.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer4/4.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer10/10.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer9/9.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer12/12.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer11/11.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer13/13.txt",
+    "s3://orchestratorfororchestratingworkers/cbe9d703-45df-4562-b68d-f7828c95305b/ea738722-f249-4248-b41b-f85f2b7aad62/reducer3/3.txt"
+  ],
+  "metadata": {
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper7": [
+      1755277673.128,
+      0.2133,
+      6.968,
+      1.5165,
+      1755277682.019,
+      "f94a652c-fb7d-42ea-8996-a51404c88ae5"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper11": [
+      1755277673.135,
+      0.2191,
+      7.738,
+      1.3649,
+      1755277682.655,
+      "e33c549f-f0fe-4c42-9c92-ceb5d84859ad"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper5": [
+      1755277673.126,
+      0.2554,
+      7.8143,
+      1.3155,
+      1755277682.704,
+      "9eebb553-bce4-4a5a-a1ff-ccf5f1e3d346"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper4": [
+      1755277673.125,
+      0.2225,
+      7.8031,
+      1.3779,
+      1755277682.723,
+      "c214d68f-19da-4f2a-864f-a814e81d51c5"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper12": [
+      1755277673.136,
+      0.2149,
+      7.775,
+      1.4186,
+      1755277682.752,
+      "bccf85a7-5ed6-422b-ac48-6427edfd8b1b"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper14": [
+      1755277673.14,
+      0.2477,
+      7.8983,
+      1.2711,
+      1755277682.756,
+      "be1324f2-0f50-4712-adbc-f6c0e86dc46a"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper10": [
+      1755277673.133,
+      0.2497,
+      7.9259,
+      1.3307,
+      1755277682.832,
+      "d1072fa5-7eb8-488f-aa69-e6052a3109ac"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper9": [
+      1755277673.131,
+      0.2192,
+      8.0512,
+      1.2368,
+      1755277682.837,
+      "87647fa0-672d-44b5-ab27-2ade139054d3"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper6": [
+      1755277673.127,
+      0.2149,
+      7.918,
+      1.3967,
+      1755277682.888,
+      "0cb12916-4aac-4f42-8dcc-42b302c77085"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper1": [
+      1755277673.123,
+      0.2213,
+      7.893,
+      1.4647,
+      1755277682.9,
+      "0d58ffec-a2d1-49fd-b889-6a52c8ca322b"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper2": [
+      1755277673.124,
+      0.2037,
+      7.9928,
+      1.404,
+      1755277682.918,
+      "613f7a16-4896-4a70-84b2-26f06acb6747"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper3": [
+      1755277673.124,
+      0.2153,
+      7.813,
+      1.4661,
+      1755277682.953,
+      "d789aaae-a092-47c8-8eb3-0586a933c4af"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper8": [
+      1755277673.129,
+      0.214,
+      8.026,
+      1.4373,
+      1755277683.022,
+      "c67d284d-a024-44d8-8499-a0e8407cb08d"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper13": [
+      1755277673.139,
+      0.2154,
+      8.247,
+      1.506,
+      1755277683.474,
+      "0a4f8215-de9b-4f49-b063-b1737b43da88"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-mapper0": [
+      1755277673.123,
+      0.2219,
+      8.278,
+      1.5963,
+      1755277683.484,
+      "d3458a28-c0ad-466c-8eae-ca798a286e8a"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer1": [
+      1755277683.492,
+      0.6118,
+      5.021,
+      0.5064,
+      1755277689.632,
+      "178df0d3-f42c-4168-b6c0-420512fc0ae7"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer0": [
+      1755277683.49,
+      0.6507,
+      5.2303,
+      0.4857,
+      1755277689.857,
+      "c0d23f27-746c-4eb2-a583-b8659aea95de"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer2": [
+      1755277683.495,
+      0.6513,
+      5.3034,
+      0.4727,
+      1755277689.923,
+      "45e15b33-b87e-4954-a4b9-2b2e64768ee2"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer5": [
+      1755277683.505,
+      0.6967,
+      5.2979,
+      0.4704,
+      1755277689.97,
+      "f94a652c-fb7d-42ea-8996-a51404c88ae5"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer14": [
+      1755277683.544,
+      0.5674,
+      5.4519,
+      0.4554,
+      1755277690.019,
+      "0d58ffec-a2d1-49fd-b889-6a52c8ca322b"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer7": [
+      1755277683.512,
+      0.6204,
+      5.5054,
+      0.4631,
+      1755277690.102,
+      "9eebb553-bce4-4a5a-a1ff-ccf5f1e3d346"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer8": [
+      1755277683.516,
+      0.6136,
+      5.5143,
+      0.4637,
+      1755277690.108,
+      "c214d68f-19da-4f2a-864f-a814e81d51c5"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer6": [
+      1755277683.509,
+      0.6127,
+      5.5985,
+      0.4736,
+      1755277690.194,
+      "e33c549f-f0fe-4c42-9c92-ceb5d84859ad"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer4": [
+      1755277683.501,
+      0.622,
+      5.6026,
+      0.4842,
+      1755277690.21,
+      "365e5f69-22d5-4c89-b2d4-000ebc04b6ce"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer10": [
+      1755277683.525,
+      0.6038,
+      5.6443,
+      0.473,
+      1755277690.246,
+      "be1324f2-0f50-4712-adbc-f6c0e86dc46a"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer9": [
+      1755277683.52,
+      0.6402,
+      5.6622,
+      0.624,
+      1755277690.447,
+      "bccf85a7-5ed6-422b-ac48-6427edfd8b1b"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer12": [
+      1755277683.534,
+      0.6015,
+      5.6791,
+      0.6921,
+      1755277690.507,
+      "87647fa0-672d-44b5-ab27-2ade139054d3"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer11": [
+      1755277683.53,
+      0.593,
+      5.9117,
+      0.4761,
+      1755277690.511,
+      "d1072fa5-7eb8-488f-aa69-e6052a3109ac"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer13": [
+      1755277683.539,
+      0.5911,
+      6.1856,
+      0.5248,
+      1755277690.841,
+      "0cb12916-4aac-4f42-8dcc-42b302c77085"
+    ],
+    "ea738722-f249-4248-b41b-f85f2b7aad62-reducer3": [
+      1755277683.499,
+      1.1384,
+      6.9177,
+      0.625,
+      1755277692.181,
+      "848e5dd9-0871-443e-9da5-425fbb10753b"
+    ]
+  }
+}
